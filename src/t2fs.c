@@ -1,3 +1,9 @@
+#include "../include/apidisk.h"
+#include "../include/bitmap2.h"
+#include "../include/t2fs.h"
+#include <stdio.h>
+#include <string.h>
+
 /*-----------------------------------------------------------------------------
 Função: Usada para identificar os desenvolvedores do T2FS.
 		Essa função copia um string de identificação para o ponteiro indicado por "name".
@@ -12,6 +18,22 @@ Saída:	Se a operação foi realizada com sucesso, a função retorna "0" (zero)
 		Em caso de erro, será retornado um valor diferente de zero.
 -----------------------------------------------------------------------------*/
 int identify2 (char *name, int size){
+	if(size > 50)
+	{
+		printf("Gabriel Moita (242248) Larissa Goncalves (228844) has only 50 characters.\n");
+		return -1;
+	}
+	else if(size < 0)
+	{
+		printf("size shouldn't be negative\n");
+		return -1;
+	}
+	else
+	{
+		char* id = "Gabriel Moita (242248) Larissa Goncalves (228844)";	//50 caracteres (com '\0')
+		memcpy(name,id,size);
+		//printf("%s\n",name);
+	}
 	return 0;
 }
 
