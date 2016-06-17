@@ -1,8 +1,11 @@
 #include "../include/apidisk.h"
 #include "../include/bitmap2.h"
 #include "../include/t2fs.h"
+#include "../include/fila2.h"
 #include <stdio.h>
 #include <string.h>
+
+#define RECORD_SIZE sizeof(struct t2fs_record)
 
 /*-----------------------------------------------------------------------------
 Função: Usada para identificar os desenvolvedores do T2FS.
