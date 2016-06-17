@@ -7,6 +7,10 @@
 
 #define RECORD_SIZE sizeof(struct t2fs_record)
 
+PFILA2 fileHandles; //lembrar de inicializar
+
+int fileCounter = 0; //limite de arquivos = 20
+
 /*-----------------------------------------------------------------------------
 Função: Usada para identificar os desenvolvedores do T2FS.
 		Essa função copia um string de identificação para o ponteiro indicado por "name".
