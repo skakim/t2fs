@@ -4,12 +4,15 @@
 #include "../include/fila2.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-#define RECORD_SIZE sizeof(struct t2fs_record)
+PFILA2 fileHandles; //lembrar de trocar para a FILA2 de inteiros
 
-PFILA2 fileHandles; //lembrar de inicializar
+int fileCounter = 0; //limite de arquivos abertos simultaneamente = 20
 
-int fileCounter = 0; //limite de arquivos = 20
+struct t2fs_superbloco *SuperBloco;
+
+struct t2fs_record *DiretorioAtual;
 
 /*-----------------------------------------------------------------------------
 Função: Usada para identificar os desenvolvedores do T2FS.
@@ -32,7 +35,7 @@ int identify2 (char *name, int size){
 	}
 	else if(size < 0)
 	{
-		printf("size shouldn't be negative\n");
+		printf("Size shouldn't be negative\n");
 		return -1;
 	}
 	else
@@ -59,6 +62,24 @@ Saída:	Se a operação foi realizada com sucesso, a função retorna o handle d
 		Em caso de erro, deve ser retornado um valor negativo.
 -----------------------------------------------------------------------------*/
 FILE2 create2 (char *filename){
+	char name[32];
+  	strncpy(name,filename,32);
+  	struct t2fs_record *record = malloc(sizeof(struct t2fs_record));
+  	
+  	DWORD free_block = searchFreeBlock2();
+  	if(free_block == 0){
+		printf("No free blocks left.\n");
+          	return -1;
+        }
+  	else
+        {
+		//verificar se o primeiro ponteiro direto do diretório atual está livre
+          	//se estiver, aloca ele, senão verifica o segundo ponteiro direto, depois verifica o de indireção simples
+          	//e depois de indireção dupla. Se nada estiver livre, retorna erro
+          
+                //após alocar, 
+        }
+  	
 	return 0;
 }
 
@@ -92,6 +113,9 @@ Saída:	Se a operação foi realizada com sucesso, a função retorna o handle d
 		Em caso de erro, deve ser retornado um valor negativo
 -----------------------------------------------------------------------------*/
 FILE2 open2 (char *filename){
+	if(fileCounter == 0){
+		createFila2(fileHandles);
+ 	}
 	return 0;
 }
 
